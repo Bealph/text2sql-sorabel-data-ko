@@ -15,7 +15,11 @@ dependencies = [
     "langchain>=1.0,<2.0",
     "langchain-core>=1.0,<2.0",
     "langchain-azure-ai>=1.0,<2.0",
+    # Le déploiement Azure expose une route OpenAI-compatible (/openai/v1) qui
+    # refuse le paramètre api-version ajouté d'office par langchain-azure-ai.
+    "langchain-openai>=0.2,<2.0",
     "azure-ai-inference>=1.0.0b9",
+    "streamlit>=1.38,<2",
 ]
 
 [dependency-groups]

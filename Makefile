@@ -1,4 +1,4 @@
-.PHONY: install up down seed chat test fmt lint typecheck
+.PHONY: install up down seed chat ui test fmt lint typecheck
 
 install:
 	uv sync
@@ -14,6 +14,9 @@ seed:
 
 chat:
 	uv run python -m agent.chat
+
+ui:
+	uv run streamlit run ui/app.py
 
 test:
 	uv run pytest -v

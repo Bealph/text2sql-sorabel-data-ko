@@ -19,4 +19,4 @@ def build_agent():
 
     llm = get_llm()
     tools = [run_sql_query, aggregate_clients]
-    return create_agent(llm, tools, prompt=SYSTEM_PROMPT)
+    return create_agent(llm, tools, system_prompt=SYSTEM_PROMPT)

@@ -7,6 +7,8 @@ from __future__ import annotations
 
 from datetime import date
 
+from dotenv import load_dotenv
+
 from db import clients, commandes, engine_from_env, lignes_commande, metadata, produits
 
 CLIENTS = [
@@ -35,6 +37,7 @@ LIGNES = [
 
 
 def main() -> None:
+    load_dotenv()
     engine = engine_from_env("DB_URL")
     metadata.drop_all(engine)
     metadata.create_all(engine)
