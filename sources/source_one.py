@@ -10,7 +10,7 @@ from typing import Any
 
 import httpx
 
-from sources.base import get_json
+from sources.base import get_json, iso_utc
 
 COMMON_KEYS = {"external_id", "raison_sociale", "ville", "ingested_at", "source"}
 
@@ -21,7 +21,7 @@ def normalize(raw: dict[str, Any]) -> dict[str, Any]:
         "external_id": str(raw["external_id"]),
         "raison_sociale": raw["raison_sociale"],
         "ville": raw["ville"],
-        "ingested_at": raw["maj"],
+        "ingested_at": iso_utc(raw["maj"]),
         "source": "source_one",
     }
 

@@ -10,7 +10,7 @@ import os
 
 from langchain_core.tools import tool
 
-from db import engine_from_env
+from db import agent_engine
 from sources.aggregate import aggregate
 from sources.base import build_client
 from sql.executor import run_query
@@ -19,7 +19,19 @@ from sql.generator import generate_sql
 
 @tool
 def run_sql_query(question: str) -> str:
-    engine = engine_from_env("DB_URL")
+    """Répond à une question chiffrée sur les données internes de Sorabel.
+
+    Traduit la question en SQL puis l'exécute sur la base de démonstration :
+    clients, produits, commandes et lignes de commande. À utiliser pour tout
+    comptage, total, moyenne ou classement portant sur ces tables.
+
+    Ne convient pas au référentiel client consolidé issu des sources externes :
+    passer par ``aggregate_clients`` dans ce cas.
+
+    Args:
+        question: La question en français, telle que posée par l'utilisateur.
+    """
+    engine = agent_engine()
     sql = generate_sql(question)
     rows = run_query(sql, engine)
     return str(rows)

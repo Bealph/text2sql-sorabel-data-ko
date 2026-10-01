@@ -17,8 +17,8 @@ htmlcov/
 dist/
 build/
 
-# uv
-uv.lock
+# uv — uv.lock est volontairement versionné : c'est une application, pas une
+# bibliothèque. Le verrou garantit des environnements identiques entre binômes.
 
 # Env
 .env

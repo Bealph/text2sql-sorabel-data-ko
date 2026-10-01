@@ -68,3 +68,15 @@ def engine_from_env(env_var: str = "DB_URL"):
     if not url:
         raise RuntimeError(f"Variable d'environnement {env_var!r} non définie.")
     return create_engine(url, future=True)
+
+
+def agent_engine():
+    """Engine destiné à l'agent : rôle en lecture seule.
+
+    Retombe sur ``DB_URL`` si ``AGENT_DB_URL`` n'est pas défini, pour que le
+    projet reste utilisable avant ``make roles`` — au prix de la protection
+    moteur. Voir ``roles.py``.
+    """
+    if os.environ.get("AGENT_DB_URL"):
+        return engine_from_env("AGENT_DB_URL")
+    return engine_from_env("DB_URL")
