@@ -38,3 +38,6 @@ build/
 # Data / model artifacts
 *.sqlite
 *.db
+
+# Documents personnels (ne pas versionner)
+*.docx
